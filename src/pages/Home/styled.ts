@@ -55,6 +55,10 @@ export const InputLabel = styled.label`
   }
 `;
 
+export const ErrorMessage = styled.span`
+  color: #fff;
+`;
+
 export const Input = styled.input`
   border: none;
   height: 40px;

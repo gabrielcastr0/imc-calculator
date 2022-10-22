@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Card from '../../components/Card';
 import * as Styled from './styled';
 
@@ -7,7 +7,8 @@ function Home() {
   const heightRef = useRef<HTMLInputElement>(null);
 
   const [imc, setImc] = useState<number>(0);
-
+  const [error, setError] = useState<boolean>();
+ 
   const handleClick = () => {
 
     const weightValue = Number.parseInt(weightRef.current!.value);
@@ -16,8 +17,9 @@ function Home() {
     if(weightValue && heightValue > 0){
       const result = Number.parseFloat((weightValue / (heightValue * heightValue)).toFixed(2));
       setImc(result);
+      setError(false);
     }else{
-      alert("Informe os valores, seu leigo!");
+      setError(true);
     }
   }
 
@@ -40,11 +42,13 @@ function Home() {
           <Styled.InputWrapper>
             <Styled.InputLabel>Digite seu peso <span>*</span></Styled.InputLabel>
             <Styled.Input type="number" placeholder="Ex: 70 (em kg)" ref={weightRef} />
+            {error && <Styled.ErrorMessage>Campo obrigatório.</Styled.ErrorMessage>}
           </Styled.InputWrapper>
 
           <Styled.InputWrapper>
             <Styled.InputLabel>Digite sua altura <span>*</span></Styled.InputLabel>
             <Styled.Input type="number" placeholder="Ex: 1.85 (em metros)" ref={heightRef} />
+            {error && <Styled.ErrorMessage>Campo obrigatório.</Styled.ErrorMessage>}
           </Styled.InputWrapper>
         </Styled.InputArea>
 
