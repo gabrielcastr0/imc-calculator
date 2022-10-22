@@ -33,4 +33,5 @@ export const Text = styled.h1`
 
 export const Subtitle = styled.h2`
   color: #fff;
+  text-align: center;
 `;

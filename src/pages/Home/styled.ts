@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 30px;
+  padding: 30px;
   background: #00bf8f;
   background: -webkit-linear-gradient(to bottom, #001510, #00bf8f);
   background: linear-gradient(to bottom, #001510, #00bf8f);
@@ -99,4 +99,8 @@ export const CardArea = styled.div<{imc: number}>`
   display: grid;
   grid-template-columns: ${props => props.imc === 0 ? 'repeat(2, 1fr)' : 'repeat(1fr)'};
   gap: 10px;
+
+  /* @media (max-width: 425px){
+    grid-template-columns: 1fr;
+  } */
 `;
