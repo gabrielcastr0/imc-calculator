@@ -28,10 +28,18 @@ export const TextWrapper = styled.div`
 
 export const Title = styled.h1`
   color: #fff;
+
+  @media (max-width: 425px){
+    font-size: 25px;
+  }
 `;
 
 export const Subtitle = styled.h2`
   color: #fff;
+
+  @media (max-width: 425px){
+    font-size: 20px;
+  }
 `;
 
 export const InputArea = styled.form`
@@ -84,7 +92,7 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 45px;
   width: 100%;
   border: none;
   background: #03A960;
@@ -103,8 +111,4 @@ export const CardArea = styled.div<{imc: number}>`
   display: grid;
   grid-template-columns: ${props => props.imc === 0 ? 'repeat(2, 1fr)' : 'repeat(1fr)'};
   gap: 10px;
-
-  /* @media (max-width: 425px){
-    grid-template-columns: 1fr;
-  } */
 `;

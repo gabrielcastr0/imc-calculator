@@ -9,8 +9,10 @@ type Props = {
 function Card({text, info, type}: Props) {
   return (
     <Styled.Container type={type}>
-      <Styled.Text>{text}</Styled.Text>
-      <Styled.Subtitle>{info}</Styled.Subtitle>
+      <Styled.WrapperText>
+        <Styled.Text>{text}</Styled.Text>
+        <Styled.Subtitle>{info}</Styled.Subtitle>
+      </Styled.WrapperText>
     </Styled.Container>
   )
 }

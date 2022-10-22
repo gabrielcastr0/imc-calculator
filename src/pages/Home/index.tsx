@@ -85,11 +85,11 @@ function Home() {
           )}
 
           {(imc >= 24.9 && imc <= 30) && (
-            <Card text="Normal" info="IMC está entre 18.5 e 24.9" type={2}/>
+            <Card text="Sobrepeso" info="IMC está entre 24.9 e 30" type={3}/>
           )}
 
           {(imc >= 30 && imc <= 99) && (
-            <Card text="Normal" info="IMC está entre 18.5 e 24.9" type={2}/>
+            <Card text="Obesidade" info="IMC está entre 30 e 99" type={4}/>
           )}
         </Styled.CardArea>
       </Styled.RightArea>
