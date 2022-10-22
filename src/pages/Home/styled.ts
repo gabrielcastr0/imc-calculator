@@ -6,14 +6,16 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 30px;
-  gap: 30px;
+  background: #00bf8f;
+  background: -webkit-linear-gradient(to bottom, #001510, #00bf8f);
+  background: linear-gradient(to bottom, #001510, #00bf8f);
 `;
 
 export const Wrapper = styled.div`
   max-width: 900px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 `;
 
 export const LeftArea = styled.div``;
@@ -24,9 +26,13 @@ export const TextWrapper = styled.div`
   gap: 10px;
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+  color: #fff;
+`;
 
-export const Subtitle = styled.h2``;
+export const Subtitle = styled.h2`
+  color: #fff;
+`;
 
 export const InputArea = styled.form`
   display: flex;
@@ -42,6 +48,8 @@ export const InputWrapper = styled.div`
 `;
 
 export const InputLabel = styled.label`
+  color: #fff;
+
   span{
     color: red;
   }
@@ -50,9 +58,16 @@ export const InputLabel = styled.label`
 export const Input = styled.input`
   border: none;
   height: 40px;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   border-radius: 5px;
   padding-left: 10px;
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+
+  ::placeholder{
+    color: #ccc;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
@@ -62,6 +77,9 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 40px;
   width: 100%;
   border: none;

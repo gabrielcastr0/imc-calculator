@@ -9,16 +9,16 @@ function Home() {
   const [imc, setImc] = useState<number>(0);
 
   const handleClick = () => {
+
     const weightValue = Number.parseInt(weightRef.current!.value);
     const heightValue = Number.parseFloat(heightRef.current!.value);
     
-    const result = Number.parseFloat((weightValue / (heightValue * heightValue)).toFixed(2));
-    
-    setImc(result);
-    alert(result);
-
-    console.log('peso 👉️', weightRef?.current?.value);
-    console.log('altura 👉️', heightRef?.current?.value);
+    if(weightValue && heightValue > 0){
+      const result = Number.parseFloat((weightValue / (heightValue * heightValue)).toFixed(2));
+      setImc(result);
+    }else{
+      alert("Informe os valores, seu leigo!");
+    }
   }
 
   const handleClickClean = () => {
@@ -44,7 +44,7 @@ function Home() {
 
           <Styled.InputWrapper>
             <Styled.InputLabel>Digite sua altura <span>*</span></Styled.InputLabel>
-            <Styled.Input type="text" placeholder="Ex: 1.85 (em metros)" ref={heightRef} />
+            <Styled.Input type="number" placeholder="Ex: 1.85 (em metros)" ref={heightRef} />
           </Styled.InputWrapper>
         </Styled.InputArea>
 
@@ -52,9 +52,12 @@ function Home() {
             <Styled.Button type="button" onClick={handleClick}>
               <Styled.TextButton>Calcular</Styled.TextButton>
             </Styled.Button>
-            <Styled.Button type="button" onClick={handleClickClean}>
-              <Styled.TextButton>Limpar campos</Styled.TextButton>
-            </Styled.Button>
+            
+            {imc > 0 && (
+              <Styled.Button type="button" onClick={handleClickClean}>
+                <Styled.TextButton>Limpar campos</Styled.TextButton>
+              </Styled.Button>
+            )}
         </Styled.ButtonWrapper>
       </Styled.LeftArea>
 
