@@ -1,44 +1,92 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import Card from '../../components/Card';
 import * as Styled from './styled';
 
 function Home() {
-  const [weight, setWeight] = useState(0);
-  const [height, setHeight] = useState(0);
+  const weightRef = useRef<HTMLInputElement>(null);
+  const heightRef = useRef<HTMLInputElement>(null);
+
+  const [imc, setImc] = useState<number>(0);
 
   const handleClick = () => {
-    const total = weight / (height * height);
-    alert(total);
+    const weightValue = Number.parseInt(weightRef.current!.value);
+    const heightValue = Number.parseFloat(heightRef.current!.value);
+    
+    const result = Number.parseFloat((weightValue / (heightValue * heightValue)).toFixed(2));
+    
+    setImc(result);
+    alert(result);
+
+    console.log('peso 👉️', weightRef?.current?.value);
+    console.log('altura 👉️', heightRef?.current?.value);
+  }
+
+  const handleClickClean = () => {
+    weightRef.current!.value = '';
+    heightRef.current!.value = '';
+    setImc(0);
   }
 
   return (
     <Styled.Container>
+      <Styled.Wrapper>
       <Styled.LeftArea>
-        <Styled.Title>Calcule o seu IMC!</Styled.Title>
+        <Styled.TextWrapper>
+          <Styled.Title>Calcule o seu IMC!</Styled.Title>
+          <Styled.Subtitle>IMC é sigla para Índice de Massa Corpórea, parâmetro adotado pela Organização Mundial de Saúde para calcular o peso ideal de cada pessoa.</Styled.Subtitle>
+        </Styled.TextWrapper>
 
         <Styled.InputArea>
-          <div>
-            <span>Peso*</span>
-            <input type="text" placeholder="Ex: 70" onChange={(e: any) => setWeight(e.target.value)}/>
-          </div>
+          <Styled.InputWrapper>
+            <Styled.InputLabel>Digite seu peso <span>*</span></Styled.InputLabel>
+            <Styled.Input type="number" placeholder="Ex: 70 (em kg)" ref={weightRef} />
+          </Styled.InputWrapper>
 
-          <div>
-            <span>Altura*</span>
-            <input type="text" placeholder="Ex: 1.85" onChange={(e: any) => setHeight(e.target.value)}/>
-          </div>
-
-          <button type="button" onClick={handleClick}>Calcular</button>
+          <Styled.InputWrapper>
+            <Styled.InputLabel>Digite sua altura <span>*</span></Styled.InputLabel>
+            <Styled.Input type="text" placeholder="Ex: 1.85 (em metros)" ref={heightRef} />
+          </Styled.InputWrapper>
         </Styled.InputArea>
 
+        <Styled.ButtonWrapper>
+            <Styled.Button type="button" onClick={handleClick}>
+              <Styled.TextButton>Calcular</Styled.TextButton>
+            </Styled.Button>
+            <Styled.Button type="button" onClick={handleClickClean}>
+              <Styled.TextButton>Limpar campos</Styled.TextButton>
+            </Styled.Button>
+        </Styled.ButtonWrapper>
       </Styled.LeftArea>
 
       <Styled.RightArea>
-        <Styled.SquaresArea>
-          <div>...</div>
-          <div>...</div>
-          <div>...</div>
-          <div>...</div>
-        </Styled.SquaresArea>
+        <Styled.CardArea imc={imc}>
+          {(imc === 0) && (
+            <>
+              <Card text="Magreza" info="IMC está entre 0 e 18.5" type={1}/>
+              <Card text="Normal" info="IMC está entre 18.5 e 24.9" type={2}/>
+              <Card text="Sobrepeso" info="IMC está entre 24.9 e 30" type={3}/>
+              <Card text="Obesidade" info="IMC está entre 30 e 99" type={4}/>
+            </>
+          )}
+
+          {(imc > 0 && imc <= 18.5) && (
+            <Card text="Magreza" info="IMC está entre 0 e 18.5" type={1}/>
+          )}
+
+          {(imc >= 18.5 && imc <= 24.9) && (
+            <Card text="Normal" info="IMC está entre 18.5 e 24.9" type={2}/>
+          )}
+
+          {(imc >= 24.9 && imc <= 30) && (
+            <Card text="Normal" info="IMC está entre 18.5 e 24.9" type={2}/>
+          )}
+
+          {(imc >= 30 && imc <= 99) && (
+            <Card text="Normal" info="IMC está entre 18.5 e 24.9" type={2}/>
+          )}
+        </Styled.CardArea>
       </Styled.RightArea>
+      </Styled.Wrapper>
     </Styled.Container>
   )
 }
